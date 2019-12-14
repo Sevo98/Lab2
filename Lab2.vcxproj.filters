@@ -24,6 +24,9 @@
     <ClInclude Include="Check.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

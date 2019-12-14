@@ -1,22 +1,9 @@
 #pragma once
-
+#include "Node.h"
 
 struct List
 {
-	struct Node
-	{
-		//конструктор узла
-		Node(int data = int(), Node* pNext = nullptr, Node* pPrev = nullptr)
-		{
-			this->Data = data;
-			this->PNext = pNext;
-			this->PPrev = pPrev;
-		}
 
-		int Data;
-		Node* PNext;
-		Node* PPrev;
-	};
 
 	//получение количества элементов в списке
 	int GetSize() { return Size; }
@@ -54,6 +41,5 @@ struct List
 
 	Node* Head;
 	Node* Tail;
-	Node* node;
 	int Size;
 };

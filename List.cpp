@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "List.h"
 #include <iostream>
+#include "Node.h"
 
 using namespace std;
 

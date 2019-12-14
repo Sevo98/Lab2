@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Check.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
