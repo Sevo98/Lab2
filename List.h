@@ -8,16 +8,16 @@ struct List
 		//конструктор узла
 		Node(int data = int(), Node* pNext = nullptr, Node* pPrev = nullptr)
 		{
-			this->data = data;
-			this->pNext = pNext;
-			this->pPrev = pPrev;
+			this->Data = data;
+			this->PNext = pNext;
+			this->PPrev = pPrev;
 		}
 
-		int data;
-		Node* pNext;
-		Node* pPrev;
+		int Data;
+		Node* PNext;
+		Node* PPrev;
 	};
-	
+
 	//получение количества элементов в списке
 	int GetSize() { return Size; }
 	//очистка списка
@@ -52,8 +52,8 @@ struct List
 	List();
 	~List();
 
-	Node* head;
-	Node* tail;
+	Node* Head;
+	Node* Tail;
 	Node* node;
 	int Size;
 };

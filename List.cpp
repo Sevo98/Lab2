@@ -7,8 +7,8 @@ using namespace std;
 
 List::List()
 {
-	head = nullptr;
-	tail = nullptr;
+	Head = nullptr;
+	Tail = nullptr;
 	Size = 0;
 }
 
@@ -30,38 +30,38 @@ void List::PushFront(int data)
 {
 	if (Size > 1)
 	{
-		Node* temp = head;
-		head = new Node (data, head);
-		temp->pPrev = head;
+		Node* temp = Head;
+		Head = new Node(data, Head);
+		temp->PPrev = Head;
 	}
 	else if (Size == 1)
 	{
-		head = new Node (data, head);
-		tail->pPrev = this->head;
+		Head = new Node(data, Head);
+		Tail->PPrev = this->Head;
 	}
 	else
 	{
-		head = tail = new Node(data, head, tail);
+		Head = Tail = new Node(data, Head, Tail);
 	}
 	Size++;
 }
 
-void List::PushBack(int data)
+void List::PushBack(int Data)
 {
 	if (Size > 1)
 	{
-		Node* temp = tail;
-		tail = new Node(data, nullptr, tail);
-		temp->pNext = tail;
+		Node* temp = Tail;
+		Tail = new Node(Data, nullptr, Tail);
+		temp->PNext = Tail;
 	}
 	else if (Size == 1)
 	{
-		tail = new Node(data, nullptr, tail);
-		head->pNext = this->tail;
+		Tail = new Node(Data, nullptr, Tail);
+		Head->PNext = this->Tail;
 	}
 	else
 	{
-		head = tail = new Node(data, head, tail);
+		Head = Tail = new Node(Data, Head, Tail);
 	}
 	Size++;
 }
@@ -70,14 +70,14 @@ void List::PopFront()
 {
 	if (Size > 1)
 	{
-		Node* temp = head;
-		head = head->pNext;
+		Node* temp = Head;
+		Head = Head->PNext;
 		delete temp;
 	}
 	else if (Size == 1)
 	{
-		Node* temp = head;
-		tail = head = head->pNext;
+		Node* temp = Head;
+		Tail = Head = Head->PNext;
 		delete temp;
 	}
 
@@ -88,14 +88,14 @@ void List::PopBack()
 {
 	if (Size > 1)
 	{
-		Node* temp = tail;
-		tail = tail->pPrev;
+		Node* temp = Tail;
+		Tail = Tail->PPrev;
 		delete temp;
 	}
 	else if (Size == 1)
 	{
-		Node* temp = tail;
-		tail = head = tail->pPrev;
+		Node* temp = Tail;
+		Tail = Head = Tail->PPrev;
 		delete temp;
 	}
 
@@ -115,34 +115,34 @@ void List::Insert(int data, int index)
 
 	else if (index <= Size / 2)
 	{
-		Node* previous = this->head;
+		Node* previous = this->Head;
 		for (int i = 0; i < index - 1; i++)
 		{
-			previous = previous->pNext;
+			previous = previous->PNext;
 		}
 
-		Node* newNode = new Node(data, previous->pNext, previous);
+		Node* newNode = new Node(data, previous->PNext, previous);
 
-		previous->pNext = newNode;
-		Node* next = newNode->pNext;
-		next->pPrev = newNode;
+		previous->PNext = newNode;
+		Node* next = newNode->PNext;
+		next->PPrev = newNode;
 
 		Size++;
 	}
 
 	else if (index > Size / 2)
 	{
-		Node* next = this->tail;
+		Node* next = this->Tail;
 		for (int i = Size - 1; index < i; i--)
 		{
-			next = next->pPrev;
+			next = next->PPrev;
 		}
 
-		Node* newNode = new Node(data, next, next->pPrev);
+		Node* newNode = new Node(data, next, next->PPrev);
 
-		next->pPrev = newNode;
-		Node* previous = newNode->pPrev;
-		previous->pNext = newNode;
+		next->PPrev = newNode;
+		Node* previous = newNode->PPrev;
+		previous->PNext = newNode;
 
 		Size++;
 	}
@@ -161,34 +161,34 @@ void List::removeAt(int index)
 
 	else if (index <= Size / 2)
 	{
-		Node* previous = this->head;
+		Node* previous = this->Head;
 		for (int i = 0; i < index - 1; i++)
 		{
-			previous = previous->pNext;
+			previous = previous->PNext;
 		}
 
-		Node* toDelete = previous->pNext;
-		previous->pNext = toDelete->pNext;
-		Node* next = toDelete->pNext;
+		Node* toDelete = previous->PNext;
+		previous->PNext = toDelete->PNext;
+		Node* next = toDelete->PNext;
 		delete toDelete;
-		next->pPrev = previous;
+		next->PPrev = previous;
 
 		Size--;
 	}
 
 	else if (index > Size / 2)
 	{
-		Node* next = this->tail;
+		Node* next = this->Tail;
 		for (int i = Size - 1; index < i; i--)
 		{
-			next = next->pPrev;
+			next = next->PPrev;
 		}
 
-		Node* toDelete = next->pPrev;
-		next->pPrev = toDelete->pPrev;
-		Node* previous = toDelete->pPrev;
+		Node* toDelete = next->PPrev;
+		next->PPrev = toDelete->PPrev;
+		Node* previous = toDelete->PPrev;
 		delete toDelete;
-		previous->pNext = next;
+		previous->PNext = next;
 
 		Size--;
 	}
@@ -199,24 +199,24 @@ int& List::operator[] (const int index)
 	if (index <= Size / 2)
 	{
 		int counter = 0;
-		Node* current = this->head;
+		Node* current = this->Head;
 
 		while (current != nullptr)
 		{
-			if (counter == index) return current->data;
-			current = current->pNext;
+			if (counter == index) return current->Data;
+			current = current->PNext;
 			counter++;
 		}
 	}
 	else
 	{
 		int counter = Size - 1;
-		Node* current = this->tail;
+		Node* current = this->Tail;
 
 		while (current != nullptr)
 		{
-			if (counter == index) return current->data;
-			current = current->pPrev;
+			if (counter == index) return current->Data;
+			current = current->PPrev;
 			counter--;
 		}
 	}
@@ -224,56 +224,56 @@ int& List::operator[] (const int index)
 
 void List::PrintFromHead()
 {
-	Node* print = head;
+	Node* print = Head;
 	while (print)
 	{
-		cout << print->data << endl;
-		print = print->pNext;
+		cout << print->Data << endl;
+		print = print->PNext;
 	}
 	cout << endl;
 }
 
 void List::PrintFromTail()
 {
-	Node* print = tail;
+	Node* print = Tail;
 	while (print)
 	{
-		cout << print->data << endl;
-		print = print->pPrev;
+		cout << print->Data << endl;
+		print = print->PPrev;
 	}
 	cout << endl;
 }
 
 bool List::LinSearch(int* tempCounter, int value)
 {
-	Node* current = head;
+	Node* current = Head;
 	while (current != nullptr)
 	{
 		(*tempCounter)++;
-		if (current->data == value)
+		if (current->Data == value)
 		{
 			return true;
 		}
-		current = current->pNext;
+		current = current->PNext;
 	}
 	return false;
 }
 
 void List::SwapData(Node* current, Node* nextCurrent)
 {
-	if (nextCurrent->pNext != nullptr)
+	if (nextCurrent->PNext != nullptr)
 	{
-		nextCurrent->pNext->pPrev = current;
+		nextCurrent->PNext->PPrev = current;
 	}
-	if (current->pPrev != nullptr)
+	if (current->PPrev != nullptr)
 	{
-		current->pPrev->pNext = nextCurrent;
+		current->PPrev->PNext = nextCurrent;
 	}
-	nextCurrent->pPrev = current->pPrev;
-	current->pNext = nextCurrent->pNext;
-	nextCurrent->pNext = current;
-	current->pPrev = nextCurrent;
-	
+	nextCurrent->PPrev = current->PPrev;
+	current->PNext = nextCurrent->PNext;
+	nextCurrent->PNext = current;
+	current->PPrev = nextCurrent;
+
 }
 
 void List::Output()
@@ -281,54 +281,54 @@ void List::Output()
 	cout << "Значения элементов списка" << endl;
 	if (Size != 0)
 	{
-		Node* temp = head;
+		Node* temp = Head;
 		int index = 0;
-		while (temp->pNext != nullptr)
+		while (temp->PNext != nullptr)
 		{
-			cout << temp->data << " - индекс " << index << endl;
-			temp = temp->pNext;
+			cout << temp->Data << " - индекс " << index << endl;
+			temp = temp->PNext;
 			index++;
 		}
-		cout << temp->data << " - индекс " << index << endl;
+		cout << temp->Data << " - индекс " << index << endl;
 	}
-	
+
 }
 
 
 void List::InsertingSort()
 {
-	Node* current = head;
-	Node* nextCurrent = current->pNext;
+	Node* current = Head;
+	Node* nextCurrent = current->PNext;
 	Node* saveCurrent = new Node;
 	saveCurrent = current;
 	while (nextCurrent != nullptr)
 	{
-		if (current->data > nextCurrent->data)
+		if (current->Data > nextCurrent->Data)
 		{
 			SwapData(current, nextCurrent);
-			if (nextCurrent->pPrev == nullptr)
+			if (nextCurrent->PPrev == nullptr)
 			{
-				nextCurrent = current->pNext;
+				nextCurrent = current->PNext;
 			}
 			else
 			{
-				current = nextCurrent->pPrev;
+				current = nextCurrent->PPrev;
 			}
 
 		}
-		else if (current->data <= nextCurrent->data)
+		else if (current->Data <= nextCurrent->Data)
 		{
 			current = nextCurrent;
-			nextCurrent = nextCurrent->pNext;
+			nextCurrent = nextCurrent->PNext;
 			saveCurrent = current;
 		}
 	}
 
-	tail = current;
-	while (current->pPrev != nullptr)
+	Tail = current;
+	while (current->PPrev != nullptr)
 	{
-		current = current->pPrev;
-		head = current;
+		current = current->PPrev;
+		Head = current;
 	}
 
 }
